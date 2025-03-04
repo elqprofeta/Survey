@@ -1,0 +1,34 @@
+name: CI for Streamlit App
+
+on:
+  push:
+    branches:
+      - main  # O tu rama principal, como master
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout del repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Configuración de Firebase (si es necesario)
+      - name: Set up Firebase credentials
+        run: echo "$FIREBASE_CREDENTIALS" > firebase-adminsdk.json
+        env:
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+
+      # Instalar dependencias
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Ejecutar Streamlit
+      - name: Run Streamlit app
+        run: |
+          streamlit run survei.py
