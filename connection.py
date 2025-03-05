@@ -12,6 +12,6 @@ if firebase_cred_json:
     # Inicializar Firebase
     cred = credentials.Certificate(firebase_cred_dict)
     initialize_app(cred)
-print("Encontré la ENV var FIREBASE_CREDENTIALS.")
+    print("Encontré la ENV var FIREBASE_CREDENTIALS.")
 else:
     print("No se encontró la variable de entorno FIREBASE_CREDENTIALS_JSON.")
