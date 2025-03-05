@@ -23,16 +23,10 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Crear archivo de credenciales Firebase
+      - name: Set up Firebase credentials
         run: |
           echo "${{ secrets.FIREBASE_CREDENTIALS }}" > firebase_credentials.json
         # Esto guarda el secreto del JSON como un archivo en tu entorno temporal
-
-         env:
-            FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
-
-          firebase_cred_path = "firebase_credentials.json"
-
 
       - name: Verificar archivo JSON de credenciales
         run: ls -l firebase_credentials.json
