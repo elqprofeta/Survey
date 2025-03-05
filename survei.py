@@ -100,11 +100,13 @@ from firebase_admin import credentials
 pyLoc = "/opt/hostedtoolcache/Python/3.13.2/x64/"
 firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 # firebase_credentials = os.getenv("SURVEII")
+firebase_cred_path = "/home/runner/work/survei/firebase_credentials.json"
 
 if firebase_credentials:
     cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
     cred = credentials.Certificate(cred_dict)    # Usar credenciales desde diccionario
     firebase_admin.initialize_app(cred)
+    cred = credentials.Certificate(firebase_cred_path)
 else:
     raise ValueError("⚠️ No se encontraron credenciales de Firebase en las variables de entorno")
 

@@ -40,6 +40,12 @@ jobs:
       - name: List files to check if firebase_credentials.json exists
         run: ls -la
 
+      - name: Verificar que firebase_credentials.json existe
+        run: ls -l firebase_credentials.json
+
+      - name: Mantener el archivo en el directorio correcto
+        run: mv firebase_credentials.json /home/runner/work/survei/firebase_credentials.json
+
 
       - name: Run Streamlit app
         run: |
