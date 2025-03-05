@@ -3,6 +3,42 @@ import streamlit as st
 import pandas as pd
 import os
 
+import os
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+#########################################################################
+from dotenv import load_dotenv
+import os
+
+# Cargar las variables de entorno desde el archivo .env
+load_dotenv()
+
+firebase_cred_path = os.getenv("FIREBASE_CRED_PATH")
+
+if firebase_cred_path:
+    cred = credentials.Certificate(firebase_cred_path)
+else:
+    print("La variable de entorno FIREBASE_CRED_PATH no está definida.")
+###########################################################################
+
+# Cargar la variable de entorno
+firebase_cred_path = os.getenv(r'c:\tmp\survey\uni\creed')
+
+# if not os.path.exists(firebase_cred_path):
+#    print(f"Error: El archivo de credenciales no se encuentra en {firebase_cred_path}")
+
+# Verificar si la variable de entorno está configurada correctamente
+# if firebase_cred_path:
+#    # Inicializar Firebase con el archivo de credenciales dinámicamente cargado
+#    cred = credentials.Certificate(firebase_cred_path)
+#    firebase_admin.initialize_app(cred)
+#    db = firestore.client()
+#    print("Firebase inicializado correctamente.")
+# else:
+#    print("Error: La variable de entorno 'FIREBASE_CREDENTIALS_PATH' no está configurada.")
+
+
 # Definir preguntas y respuestas
 preguntas = [
     ("¿Qué tipo de actividades disfrutas más?", 
@@ -80,31 +116,44 @@ for i, (pregunta, opciones) in enumerate(preguntas):
 habilidades_respuestas = {}
 for i, (pregunta, opciones) in enumerate(habilidades):
     respuesta = st.radio(pregunta, opciones, key=f"habilidad_{i}")
+#    respuesta = st.multiselect(pregunta, opciones, key=f"habilidad_{i}")
     habilidades_respuestas[pregunta] = respuesta
 
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# Inicializar Firebase
+# Inicializar Firebase ************* ------- *****
 if not firebase_admin._apps:
-    cred = credentials.Certificate("surveii-9b644-firebase-adminsdk-fbsvc-686e883150.json")  # Reemplázalo con tu archivo JSON
-    firebase_admin.initialize_app(cred)
+#    cred = credentials.Certificate("surveii-9b644-firebase-adminsdk-fbsvc-686e883150.json")  # Reemplázalo con tu archivo JSON
+    # Inicializar Firebase con el archivo de credenciales dinámicamente cargado #1
+#    cred = credentials.Certificate(firebase_cred_path)                          #2 error aqui
+#    firebase_admin.initialize_app(cred)                                         #3
+#    db = firestore.client()                                                     #4
+#    print("Firebase inicializado correctamente.")                               #5 copia de la def arriba
 
-db = firestore.client()
+#    firebase_admin.initialize_app(cred)
 
-# Inferencia de la mejor opción según respuestas
-if st.button("Obtener Resultado"):
+    db = firestore.client()
+
+# Solicitar correo electrónico del usuario
+user_email = st.text_input("Por favor ingresa tu correo electrónico:", "")
+
+# Verificar si el correo no está vacío antes de guardar
+if user_email:
+
+# Inferencia de la mejor opción según respuestas  ******************
+    if st.button("Obtener Resultado"):
     # Ordenar categorías según la cantidad de coincidencias
-    categorias_ordenadas = sorted(contador_categorias.items(), key=lambda x: x[1], reverse=True)
+       categorias_ordenadas = sorted(contador_categorias.items(), key=lambda x: x[1], reverse=True)
 
     # Mostrar las mejores opciones
     st.subheader("Tus opciones recomendadas:")
     if len(categorias_ordenadas) >= 3:
-        st.write(f"1️⃣ Primera opción: **{categorias_ordenadas[0][0]}**")
-        st.write(f"2️⃣ Segunda opción: **{categorias_ordenadas[1][0]}**")
-        st.write(f"3️⃣ Tercera opción: **{categorias_ordenadas[2][0]}**")
+       st.write(f"1️⃣ Primera opción: **{categorias_ordenadas[0][0]}**")
+       st.write(f"2️⃣ Segunda opción: **{categorias_ordenadas[1][0]}**")
+       st.write(f"3️⃣ Tercera opción: **{categorias_ordenadas[2][0]}**")
     else:
-        st.write("No hay suficientes datos para determinar tres opciones.")
+       st.write("No hay suficientes datos para determinar tres opciones.")
 
     # Mostrar habilidades y herramientas seleccionadas
     st.subheader("Habilidades y herramientas seleccionadas:")
@@ -125,20 +174,28 @@ if st.button("Obtener Resultado"):
     if habilidades_respuestas["¿Qué nivel de conocimiento tienes en programas de arquitectura y modelado en 3D (rendering)?"] == "Ninguna":
         st.write("🏗️ Considera aprender modelado en 3D si te interesa diseño y creatividad.")
 
-    # Guardar en CSV con codificación UTF-8
-    if st.button("Obtener Resultado"):
-    doc_ref = db.collection("resultados_vocacionales").add({
-        "opcion_1": categorias_ordenadas[0][0],
-        "opcion_2": categorias_ordenadas[1][0],
-        "opcion_3": categorias_ordenadas[2][0],
-        "habilidades": habilidades_respuestas
-    })
+    # Guardar resultados en Firebase
+    # Intentar ejecutar código que puede generar un error
+    try:
+    #    user_id = "usuario_demo"  # Reemplazar con identificador real
+        doc_ref = db.collection("resultados_vocacionales").document(user_email)
+	
+        top_categorias = [cat[0] for cat in categorias_ordenadas[:3]]  # Máximo 3 opciones
+        while len(top_categorias) < 3:
+            top_categorias.append("No determinado")
 
-    st.success("Tus respuestas han sido guardadas en Firebase.")
+        doc_ref.set({
+   	    "opcion_1": categorias_ordenadas[0][0],
+  	    "opcion_2": categorias_ordenadas[1][0],
+  	    "opcion_3": categorias_ordenadas[2][0],
+   	    "habilidades": habilidades_respuestas
+	})
 
+        st.success("Tus respuestas han sido guardadas en Firebase.")
+    except Exception as e:
+        st.error(f"Error al guardar en Firebase: {e}")
 
- #   st.success(f"Tus respuestas han sido guardadas en '{file_name}'.") ** remante de la version anterior de codigo -> EQ
-
- # Detener la ejecución para evitar que el script siga corriendo en segundo plano
- #   st.stop()
-    sys.exit()
+    # Detener la ejecución para evitar que el script siga corriendo en segundo plano
+    st.stop()
+else:
+    st.warning("Por favor, ingresa tu correo electrónico para continuar.")

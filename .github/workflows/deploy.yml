@@ -1,0 +1,35 @@
+name: Deploy Streamlit App
+
+on:
+  push:
+    branches:
+      - main  # Puedes ajustar la rama según lo que estés usando
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Esto puede ser 'windows-latest' o 'macos-latest'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Esto permite acceder al código en tu repo
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Usa la versión de Python que prefieras
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Firebase credentials
+        run: |
+          echo "${{ secrets.FIREBASE_CREDENTIALS_JSON }}" > firebase_credentials.json
+        # Esto guarda el secreto del JSON como un archivo en tu entorno temporal
+
+      - name: Run Streamlit app
+        run: |
+          streamlit run survei.py
+        # Aquí ejecutas tu app de Streamlit
+
