@@ -34,6 +34,10 @@ jobs:
 #      - name: Mostrar primeras líneas del JSON (sin exponer todo)
 #        run: head -n 5 firebase_credentials.json
 
+       - name: List files to check if firebase_credentials.json exists
+         run: ls -la
+
+
       - name: Run Streamlit app
         run: |
           streamlit run survei.py
