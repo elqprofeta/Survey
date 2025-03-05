@@ -94,11 +94,16 @@ from firebase_admin import credentials, firestore
 print ("aqui llega bien")
 
 # Inicializar Firebase ************* ------- *****
-if not firebase_admin._apps:
-#    cred = credentials.Certificate("surveii-9b644-firebase-adminsdk-fbsvc-686e883150.json")  # Reemplázalo con tu archivo JSON
-    firebase_cred_path = "firebase_credentials.json"
+
+
+# if not firebase_admin._apps:
+firebase_cred_path = "firebase_credentials.json"
+print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
+if not os.path.exists(firebase_cred_path):
+    raise FileNotFoundError(f"No se encontró el archivo de credenciales en: {firebase_cred_path}")
 
     # Inicializar Firebase con el archivo de credenciales dinámicamente cargado #1
+    print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
     cred = credentials.Certificate(firebase_cred_path)                                    
     print ("va bien")
 #    firebase_admin.initialize_app(cred)                                         #3
