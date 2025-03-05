@@ -104,7 +104,7 @@ if not os.path.exists(firebase_cred_path):
 
     # Inicializar Firebase con el archivo de credenciales dinámicamente cargado #1
     print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
-    cred = credentials.Certificate(firebase_cred_path)                                    
+#    cred = credentials.Certificate(firebase_cred_path)                                    
     print ("va bien")
 #    firebase_admin.initialize_app(cred)                                         #3
 #    db = firestore.client()                                                     #4
@@ -112,7 +112,7 @@ if not os.path.exists(firebase_cred_path):
 
 #    firebase_admin.initialize_app(cred)
 
-    db = firestore.client()
+#    db = firestore.client()
 
 # Solicitar correo electrónico del usuario
 user_email = st.text_input("Por favor ingresa tu correo electrónico:", "")
