@@ -90,14 +90,22 @@ for i, (pregunta, opciones) in enumerate(habilidades):
     habilidades_respuestas[pregunta] = respuesta
 
 import firebase_admin
-from firebase_admin import credentials, firestore
-print ("aqui llega bien")
+# from firebase_admin import credentials, firestore
+from firebase_admin import credentials
 
 # Inicializar Firebase ************* ------- *****
 
 
-# if not firebase_admin._apps:
-firebase_cred_path = "firebase_credentials.json"
+# Recuperar el JSON de las credenciales desde una variable de entorno
+firebase_credentials = os.getenv("secrets.FIREBASE_CREDENTIALS")
+
+if firebase_credentials:
+    cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
+    cred = credentials.Certificate(cred_dict)    # Usar credenciales desde diccionario
+    firebase_admin.initialize_app(cred)
+else:
+    raise ValueError("⚠️ No se encontraron credenciales de Firebase en las variables de entorno")
+
 print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
 if not os.path.exists(firebase_cred_path):
     print(f"No se encontró el archivo de credenciales en: {firebase_cred_path}")
@@ -112,7 +120,7 @@ if not os.path.exists(firebase_cred_path):
 
 #    firebase_admin.initialize_app(cred)
 
-#    db = firestore.client()
+    db = firestore.client()
 
 # Solicitar correo electrónico del usuario
 user_email = st.text_input("Por favor ingresa tu correo electrónico:", "")
