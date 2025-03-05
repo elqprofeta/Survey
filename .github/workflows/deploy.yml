@@ -44,7 +44,7 @@ jobs:
         run: ls -l firebase_credentials.json
 
       - name: Mantener el archivo en el directorio correcto
-        run: mv firebase_credentials.json /home/runner/work/survei/firebase_credentials.json
+        run: mv firebase_credentials.json /survey/main/firebase_credentials.json
 
 
       - name: Run Streamlit app
