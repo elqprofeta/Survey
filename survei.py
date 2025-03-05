@@ -4,39 +4,23 @@ import pandas as pd
 import os
 
 import os
+import json
 import firebase_admin
 from firebase_admin import credentials, firestore
 
 #########################################################################
-from dotenv import load_dotenv
-import os
+# Cargar la ruta del archivo JSON en el mismo directorio donde corre el script
+firebase_cred_path = "firebase_credentials.json"
 
-# Cargar las variables de entorno desde el archivo .env
-load_dotenv()
-
-firebase_cred_path = os.getenv("FIREBASE_CRED_PATH")
-
-if firebase_cred_path:
+# Verificar que el archivo existe antes de inicializar Firebase
+if os.path.exists(firebase_cred_path):
     cred = credentials.Certificate(firebase_cred_path)
+    firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    st.stop()
 else:
-    print("La variable de entorno FIREBASE_CRED_PATH no está definida.")
+    raise FileNotFoundError("El archivo firebase_credentials.json no se encontró.")  
 ###########################################################################
-
-# Cargar la variable de entorno
-firebase_cred_path = os.getenv(r'c:\tmp\survey\uni\creed')
-
-# if not os.path.exists(firebase_cred_path):
-#    print(f"Error: El archivo de credenciales no se encuentra en {firebase_cred_path}")
-
-# Verificar si la variable de entorno está configurada correctamente
-# if firebase_cred_path:
-#    # Inicializar Firebase con el archivo de credenciales dinámicamente cargado
-#    cred = credentials.Certificate(firebase_cred_path)
-#    firebase_admin.initialize_app(cred)
-#    db = firestore.client()
-#    print("Firebase inicializado correctamente.")
-# else:
-#    print("Error: La variable de entorno 'FIREBASE_CREDENTIALS_PATH' no está configurada.")
 
 
 # Definir preguntas y respuestas

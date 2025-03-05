@@ -1,0 +1,35 @@
+name: Deploy Streamlit App
+
+on:
+  push:
+    branches:
+      - main  # O la rama principal de tu repo
+  workflow_dispatch:  # Permite ejecución manual
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+
+      - name: Crear archivo de credenciales de Firebase
+        env:
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: |
+          echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json
+
+      - name: Ejecutar la app con Streamlit
+        run: |
+          streamlit run survei.py --server.port 8501 --server.headless true
+
