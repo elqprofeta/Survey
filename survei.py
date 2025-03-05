@@ -100,7 +100,7 @@ print ("aqui llega bien")
 firebase_cred_path = "firebase_credentials.json"
 print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
 if not os.path.exists(firebase_cred_path):
-    raise FileNotFoundError(f"No se encontró el archivo de credenciales en: {firebase_cred_path}")
+    print(f"No se encontró el archivo de credenciales en: {firebase_cred_path}")
 
     # Inicializar Firebase con el archivo de credenciales dinámicamente cargado #1
     print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
