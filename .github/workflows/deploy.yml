@@ -46,5 +46,5 @@ jobs:
           streamlit run survei.py
         # Aquí ejecutas tu app de Streamlit
 
-     - name: Eliminar credenciales temporales
-       run: rm firebase_credentials.json
+      - name: Eliminar credenciales temporales
+        run: rm firebase_credentials.json
