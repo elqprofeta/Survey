@@ -8,7 +8,7 @@ import json
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# añadido
+
 # Cargar la ruta del archivo JSON en el mismo directorio donde corre el script
 firebase_cred_path = "firebase_credentials.json"
 
@@ -20,7 +20,7 @@ if os.path.exists(firebase_cred_path):
     st.stop()
 else:
     raise FileNotFoundError("El archivo firebase_credentials.json no se encontró.")  
-# añadido
+
 
 
 # Definir preguntas y respuestas

@@ -28,11 +28,11 @@ jobs:
           echo "${{ secrets.FIREBASE_CREDENTIALS }}" > firebase_credentials.json
         # Esto guarda el secreto del JSON como un archivo en tu entorno temporal
 
-      - name: Verificar archivo JSON de credenciales
-        run: ls -l firebase_credentials.json
+#      - name: Verificar archivo JSON de credenciales
+#        run: ls -l firebase_credentials.json
 
-      - name: Mostrar primeras líneas del JSON (sin exponer todo)
-        run: head -n 5 firebase_credentials.json
+#      - name: Mostrar primeras líneas del JSON (sin exponer todo)
+#        run: head -n 5 firebase_credentials.json
 
       - name: Run Streamlit app
         run: |
