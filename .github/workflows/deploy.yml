@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Esto permite acceder al código en tu repo
+        uses: actions/checkout@v2  # Esto permite acceder al código en tu repo
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.x'  # Usa la versión de Python que prefieras
 
