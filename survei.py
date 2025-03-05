@@ -6,20 +6,7 @@ import os
 import os
 import json
 import firebase_admin
-from firebase_admin import credentials, firestore
-
-
-# Cargar la ruta del archivo JSON en el mismo directorio donde corre el script
-firebase_cred_path = "firebase_credentials.json"
-
-# Verificar que el archivo existe antes de inicializar Firebase
-if os.path.exists(firebase_cred_path):
-    cred = credentials.Certificate(firebase_cred_path)
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
-    st.stop()
-else:
-    raise FileNotFoundError("El archivo firebase_credentials.json no se encontró.")  
+from firebase_admin import credentials, firestore 
 
 
 
