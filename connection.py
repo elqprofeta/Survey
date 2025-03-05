@@ -3,7 +3,7 @@ import json
 from firebase_admin import credentials, initialize_app
 
 # Recuperar el secreto del JSON desde la variable de entorno
-firebase_cred_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
+firebase_cred_json = os.getenv("FIREBASE_CREDENTIALS")
 
 if firebase_cred_json:
     # Convertir el JSON en un diccionario
