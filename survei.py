@@ -5,8 +5,7 @@ import os
 
 import os
 import json
-import firebase_admin
-from firebase_admin import credentials, firestore 
+
 
 
 
@@ -92,12 +91,16 @@ for i, (pregunta, opciones) in enumerate(habilidades):
 
 import firebase_admin
 from firebase_admin import credentials, firestore
+print ("aqui llega bien")
 
 # Inicializar Firebase ************* ------- *****
 if not firebase_admin._apps:
 #    cred = credentials.Certificate("surveii-9b644-firebase-adminsdk-fbsvc-686e883150.json")  # Reemplázalo con tu archivo JSON
+    firebase_cred_path = "firebase_credentials.json"
+
     # Inicializar Firebase con el archivo de credenciales dinámicamente cargado #1
-#    cred = credentials.Certificate(firebase_cred_path)                          #2 error aqui
+    cred = credentials.Certificate(firebase_cred_path)                                    
+    print ("va bien")
 #    firebase_admin.initialize_app(cred)                                         #3
 #    db = firestore.client()                                                     #4
 #    print("Firebase inicializado correctamente.")                               #5 copia de la def arriba
