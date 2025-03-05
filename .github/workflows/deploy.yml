@@ -32,7 +32,7 @@ jobs:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
 #      - name: Verificar archivo JSON de credenciales
-#        run: ls -l firebase_credentials.json
+        run: ls -l firebase_credentials.json
 
 #      - name: Mostrar primeras líneas del JSON (sin exponer todo)
 #        run: head -n 5 firebase_credentials.json

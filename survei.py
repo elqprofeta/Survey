@@ -97,7 +97,7 @@ from firebase_admin import credentials
 
 
 # Recuperar el JSON de las credenciales desde una variable de entorno
-firebase_credentials = os.getenv("secrets.FIREBASE_CREDENTIALS")
+firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 
 if firebase_credentials:
     cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
