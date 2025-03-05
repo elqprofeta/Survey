@@ -98,7 +98,7 @@ from firebase_admin import credentials
 
 # Recuperar el JSON de las credenciales desde una variable de entorno
 pyLoc = "/opt/hostedtoolcache/Python/3.13.2/x64/"
-firebase_credentials = os.getenv(pyloc + "FIREBASE_CREDENTIALS")
+firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 # firebase_credentials = os.getenv("SURVEII")
 
 if firebase_credentials:
