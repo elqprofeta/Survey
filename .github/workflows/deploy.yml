@@ -27,6 +27,9 @@ jobs:
         run: |
           echo "${{ secrets.FIREBASE_CREDENTIALS }}" > firebase_credentials.json
         # Esto guarda el secreto del JSON como un archivo en tu entorno temporal
+        shell: bash
+        env:
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
 #      - name: Verificar archivo JSON de credenciales
 #        run: ls -l firebase_credentials.json
