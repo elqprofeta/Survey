@@ -157,7 +157,7 @@ if user_email:
     # Intentar ejecutar código que puede generar un error
     try:
     #    user_id = "usuario_demo"  # Reemplazar con identificador real
-        doc_ref = db.collection("resultados_vocacionales").document(user_email)
+    #    doc_ref = db.collection("resultados_vocacionales").document(user_email)
 	
         top_categorias = [cat[0] for cat in categorias_ordenadas[:3]]  # Máximo 3 opciones
         while len(top_categorias) < 3:
