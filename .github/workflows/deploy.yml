@@ -49,8 +49,8 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: list secreto
-        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" | jq .
+#      - name: list secreto
+#        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" | jq .
 
 
       - name: Run Streamlit app
