@@ -46,6 +46,8 @@ jobs:
 #      - name: Mantener el archivo en el directorio correcto
 #        run: mv firebase_credentials.json /survey/main/firebase_credentials.json
 
+       run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" | jq .
+
 
       - name: Run Streamlit app
         run: |
