@@ -93,15 +93,29 @@ import firebase_admin
 from firebase_admin import credentials
 
 # Inicializar Firebase ************* ------- *****
-
+print ("Inicializar Firebase")  
 
 # Recuperar el JSON de las credenciales desde una variable de entorno
 firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 print (firebase_credentials)
 print(f" credenciales de Firebase: {firebase_credentials}")
-
+print ("varibale de entorno capturada")  
 print(repr(firebase_credentials))  # Muestra la forma real de la cadena ***
 
+# SECCION DE PRUEBA DE ESCRITORIO
+import json
+
+firebase_cred_json = os.getenv("FIREBASE_CREDENTIALS")
+
+if firebase_cred_json:
+    try:
+        firebase_cred_json = json.loads(firebase_cred_json)  # Primera decodificación
+        cred_dict = json.loads(firebase_cred_json)  # Segunda decodificación
+        print("✅ JSON decodificado correctamente.")
+    except json.JSONDecodeError as e:
+        print(f"❌ Error al decodificar JSON: {e}")
+# FIN SECCION DE PRUEBA DE ESCRITORIO
+print ("finde la seccion de prueba")  
 
 if firebase_credentials:
     cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
