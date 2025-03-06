@@ -100,13 +100,16 @@ firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 print (firebase_credentials)
 print(f" credenciales de Firebase: {firebase_credentials}")
 
+print(repr(firebase_credentials))  # Muestra la forma real de la cadena ***
 
-# if firebase_credentials:
+
+ if firebase_credentials:
     cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
     cred = credentials.Certificate(cred_dict)    # Usar credenciales desde diccionario
     firebase_admin.initialize_app(cred)          # # Inicializar Firebase con las credenciales
-# else:
-#    raise ValueError(" No se encontraron credenciales de Firebase en las variables de entorno ")
+ else:
+    raise ValueError(" No se encontraron credenciales de Firebase en las variables de entorno ")
+    print(firebase_cred_json[:500])  # Muestra solo una parte para evitar exponer credenciales
 #    del os.environ["FIREBASE_CREDENTIALS"]  # Eliminamos la variable
 #   ⚠️
 

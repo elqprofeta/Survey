@@ -46,6 +46,9 @@ jobs:
 #      - name: Mantener el archivo en el directorio correcto
 #        run: mv firebase_credentials.json /survey/main/firebase_credentials.json
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: list secreto
         run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" | jq .
 
