@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 import os
 
-import os
 import json
 
 
@@ -98,33 +97,28 @@ from firebase_admin import credentials
 
 # Recuperar el JSON de las credenciales desde una variable de entorno
 firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
-firebase_cred_path = "firebase_credentials.json"
 print (firebase_credentials)
-# print (firebase_cred_path)
+print(f" credenciales de Firebase: {firebase_credentials}")
+
 
 if firebase_credentials:
     cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
     cred = credentials.Certificate(cred_dict)    # Usar credenciales desde diccionario
-    firebase_admin.initialize_app(cred)
-    cred = credentials.Certificate(firebase_cred_path)
+    firebase_admin.initialize_app(cred)          # # Inicializar Firebase con las credenciales
 else:
-    raise ValueError("⚠️ No se encontraron credenciales de Firebase en las variables de entorno")
+    raise ValueError(" No se encontraron credenciales de Firebase en las variables de entorno ")
+    del os.environ["FIREBASE_CREDENTIALS"]  # Eliminamos la variable
+#   ⚠️
 
-print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
-if not os.path.exists(firebase_cred_path):
-    print(f"No se encontró el archivo de credenciales en: {firebase_cred_path}")
 
-    # Inicializar Firebase con el archivo de credenciales dinámicamente cargado #1
-    print(f"Ruta de credenciales de Firebase: {firebase_cred_path}")
-#    cred = credentials.Certificate(firebase_cred_path)                                    
-    print ("va bien")
-#    firebase_admin.initialize_app(cred)                                         #3
-#    db = firestore.client()                                                     #4
-#    print("Firebase inicializado correctamente.")                               #5 copia de la def arriba
+                               
+    print ("va bien")                   #5 copia de la def arriba
+
+                              
 
 #    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
+#    print("Firebase inicializado correctamente.") 
+#    db = firestore.client()
 
 # Solicitar correo electrónico del usuario
 user_email = st.text_input("Por favor ingresa tu correo electrónico:", "")
