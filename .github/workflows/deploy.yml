@@ -55,8 +55,11 @@ jobs:
       - name: Run Streamlit app
         run: |
         #  streamlit run survei.py  # Línea comentada correctamente
-        #  streamlit run lee.py --server.port 8501
+          streamlit run lee.py 
         # Aquí ejecutas tu app de Streamlit
+
+      - name: Ver estructura de archivos
+        run: ls -R
 
       - name: Eliminar credenciales temporales
         run: rm firebase_credentials.json
