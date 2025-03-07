@@ -53,15 +53,11 @@ jobs:
 #        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" | jq .
 
 
-#      - name: Run Streamlit app
-#        run: |
+      - name: Run Streamlit app
+        run: |
 #          streamlit run survei.py
+          streamlit run lee.py
 #        # Aquí ejecutas tu app de Streamlit
 
-#      - name: Eliminar credenciales temporales
-#        run: rm firebase_credentials.json
-
-      - name: Run lee app
-        run: |
-          python run lee.py
-        # Aquí ejecutas tu lee app
+      - name: Eliminar credenciales temporales
+        run: rm firebase_credentials.json
