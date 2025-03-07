@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Streamlit app
         run: |
-#          streamlit run survei.py
+        #  streamlit run survei.py  # Línea comentada correctamente
           streamlit run lee.py --server.port 8501
         # Aquí ejecutas tu app de Streamlit
 
