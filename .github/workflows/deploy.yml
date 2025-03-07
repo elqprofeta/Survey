@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Streamlit app
         run: |
-          streamlit run src/lee.py
+          streamlit run lee.py
         # Aquí ejecutas tu app de Streamlit
 
       - name: Ver estructura de archivos
