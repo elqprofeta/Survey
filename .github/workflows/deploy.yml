@@ -63,5 +63,5 @@ jobs:
 
       - name: Run lee app
         run: |
-          python run survei.py
+          python run lee.py
         # Aquí ejecutas tu lee app
