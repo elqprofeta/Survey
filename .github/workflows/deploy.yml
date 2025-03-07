@@ -52,11 +52,10 @@ jobs:
 #      - name: list secreto
 #        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" | jq .
 
-
       - name: Run Streamlit app
         run: |
 #          streamlit run survei.py
-          streamlit run lee.py
+          streamlit run lee.py --server.port 8501
         # Aquí ejecutas tu app de Streamlit
 
       - name: Eliminar credenciales temporales
