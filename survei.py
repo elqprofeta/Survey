@@ -142,7 +142,7 @@ user_email = st.text_input("Por favor ingresa tu correo electrónico:", "")
 
 # Verificar si el correo no está vacío antes de guardar
 if user_email:
-categorias_ordenadas = ["Alta", "Media", "Baja"]
+  categorias_ordenadas = ["Alta", "Media", "Baja"]
 # Inferencia de la mejor opción según respuestas  ******************
     if st.button("Obtener Resultado"):
     # Ordenar categorías según la cantidad de coincidencias
