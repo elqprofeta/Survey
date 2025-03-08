@@ -129,7 +129,7 @@ print ("finde la seccion de prueba")
 
 
                                
-    print ("va bien")                   #5 copia de la def arriba
+#    print ("va bien")                   #5 copia de la def arriba
 
                               
 
