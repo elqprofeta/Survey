@@ -187,11 +187,11 @@ if user_email:
             top_categorias.append("No determinado")
 
     #    doc_ref.set({
-   	    "opcion_1": categorias_ordenadas[0][0],
-  	    "opcion_2": categorias_ordenadas[1][0],
-  	    "opcion_3": categorias_ordenadas[2][0],
-   	    "habilidades": habilidades_respuestas
-	})
+    #	    "opcion_1": categorias_ordenadas[0][0],
+    #	    "opcion_2": categorias_ordenadas[1][0],
+    #	    "opcion_3": categorias_ordenadas[2][0],
+    #	    "habilidades": habilidades_respuestas
+    #	})
 
         st.success("Tus respuestas han sido guardadas en Firebase.")
     except Exception as e:
