@@ -193,9 +193,9 @@ if user_email:
    	    "habilidades": habilidades_respuestas
 	})
 
-         st.success("Tus respuestas han sido guardadas en Firebase.")
+        st.success("Tus respuestas han sido guardadas en Firebase.")
      except Exception as e:
-         st.error(f"Error al guardar en Firebase: {e}")
+        st.error(f"Error al guardar en Firebase: {e}")
 
     # Detener la ejecución para evitar que el script siga corriendo en segundo plano
     st.stop()
