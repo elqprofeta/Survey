@@ -194,7 +194,7 @@ if user_email:
 	})
 
         st.success("Tus respuestas han sido guardadas en Firebase.")
-     except Exception as e:
+    except Exception as e:
         st.error(f"Error al guardar en Firebase: {e}")
 
     # Detener la ejecución para evitar que el script siga corriendo en segundo plano
