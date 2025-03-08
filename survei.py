@@ -93,27 +93,27 @@ import firebase_admin
 from firebase_admin import credentials
 
 # Inicializar Firebase ************* ------- *****
-print ("Inicializar Firebase")  
+# print ("Inicializar Firebase")  
 
 # Recuperar el JSON de las credenciales desde una variable de entorno
-firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
-print (firebase_credentials)
-print(f" credenciales de Firebase: {firebase_credentials}")
-print ("varibale de entorno capturada")  
-print(repr(firebase_credentials))  # Muestra la forma real de la cadena ***
+# firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
+# print (firebase_credentials)
+# print(f" credenciales de Firebase: {firebase_credentials}")
+# print ("varibale de entorno capturada")  
+# print(repr(firebase_credentials))  # Muestra la forma real de la cadena ***
 
 # SECCION DE PRUEBA DE ESCRITORIO
 import json
 
-firebase_cred_json = os.getenv("FIREBASE_CREDENTIALS")
+# firebase_cred_json = os.getenv("FIREBASE_CREDENTIALS")
 
-if firebase_cred_json:
-    try:
-        firebase_cred_json = json.loads(firebase_cred_json)  # Primera decodificación
-        cred_dict = json.loads(firebase_cred_json)  # Segunda decodificación
-        print("✅ JSON decodificado correctamente.")
-    except json.JSONDecodeError as e:
-        print(f"❌ Error al decodificar JSON: {e}")
+# if firebase_cred_json:
+#     try:
+#         firebase_cred_json = json.loads(firebase_cred_json)  # Primera decodificación
+#         cred_dict = json.loads(firebase_cred_json)  # Segunda decodificación
+#         print("✅ JSON decodificado correctamente.")
+#      except json.JSONDecodeError as e:
+#         print(f"❌ Error al decodificar JSON: {e}")
 # FIN SECCION DE PRUEBA DE ESCRITORIO
 print ("finde la seccion de prueba")  
 
@@ -121,9 +121,9 @@ if firebase_credentials:
     cred_dict = json.loads(firebase_credentials)  # Convertir la cadena en un diccionario Python
     cred = credentials.Certificate(cred_dict)    # Usar credenciales desde diccionario
     firebase_admin.initialize_app(cred)          # # Inicializar Firebase con las credenciales
-else:
-    raise ValueError(" No se encontraron credenciales de Firebase en las variables de entorno ")
-    print(firebase_cred_json[:500])  # Muestra solo una parte para evitar exponer credenciales
+# else:
+#     raise ValueError(" No se encontraron credenciales de Firebase en las variables de entorno ")
+#     print(firebase_cred_json[:500])  # Muestra solo una parte para evitar exponer credenciales
 #    del os.environ["FIREBASE_CREDENTIALS"]  # Eliminamos la variable
 #   ⚠️
 
@@ -193,9 +193,9 @@ if user_email:
    	    "habilidades": habilidades_respuestas
 	})
 
-        st.success("Tus respuestas han sido guardadas en Firebase.")
-    except Exception as e:
-        st.error(f"Error al guardar en Firebase: {e}")
+         st.success("Tus respuestas han sido guardadas en Firebase.")
+     except Exception as e:
+         st.error(f"Error al guardar en Firebase: {e}")
 
     # Detener la ejecución para evitar que el script siga corriendo en segundo plano
     st.stop()
